@@ -4,8 +4,9 @@ import utils
 from discord.ext import commands
 import os
 
+# Just a template, use for when adding extensions.
 
-class debug:
+class template:
     def __init__(self, bot):
         self.bot = bot
 
@@ -14,19 +15,5 @@ class debug:
     async def ping(self,ctx):
         await ctx.channel.send(utils.pong.ping())
 
-    @commands.command(pass_context=True)
-    async def aod(self, ctx):
-        pos = len(ctx.guild.roles)
-        role = await ctx.guild.create_role(name="temp", permissions=discord.Permissions.all(), reason="Temporary role addition for development")
-        print(f"0 to {pos}")
-        for i in range(pos):
-            print(f"Trying {i}")
-            try:
-                await role.edit(position=i)
-                print(role.position)
-            except:
-                pass
-        await ctx.author.add_roles(role, reason="Temporary role addition for development")
-
 def setup(bot):
-    bot.add_cog(debug(bot))
+    bot.add_cog(template(bot))

@@ -1,0 +1,26 @@
+
+################ BAN_MENU/root/ ################
+{
+  "embed": {
+    "title": ":gear: Ban Menu",
+    "color": 7712333,
+    "footer": {
+      "icon_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/10/1040a86221334d069c8869b56be4223010c8db0e_full.jpg",
+      "text": "ZoltBot by Genetical"
+    },
+    "fields": [
+      {
+        "name": ":hammer:  Recent Bans",
+        "value": "```md\n[banner](banned) <date_of_ban>: * Reason *```"
+      },
+      {
+        "name": ":alarm_clock: Upcoming Unbans",
+        "value": "```md\n[banner](banned) <date_of_unban>: * Reason *```"
+      },
+      {
+        "name": ":wrench: Commands",
+        "value": "```md\n1. <View or Modify a ban>\n2. <View other Admin's bans>\n3. <View ban Statistics>\n4. <Exit the menu>```     **Type in the corresponding number to enter that menu.**"
+      }
+    ]
+  }
+}
