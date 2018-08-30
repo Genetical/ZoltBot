@@ -9,7 +9,7 @@ from discord import Embed
 class ban_menu:
     ## Store template for root menu, xml version can be found in ./ui_xml_templates.txt
 
-    def fetch_root():
+    def fetch_root(self):
         root_template = discord.Embed(title=":gear: Ban Menu", colour=discord.Colour(0x75ae4d))
         root_template.set_footer(text="ZoltBot by Genetical", icon_url="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/10/1040a86221334d069c8869b56be4223010c8db0e_full.jpg")
 
@@ -28,3 +28,16 @@ class ban_menu:
 
 
         root_template.add_field(name=":wrench: Commands", value="```md\n1. <View or Modify a ban>\n2. <View other Admin's bans>\n3. <View ban Statistics>\n4. <Exit the menu>```     **Type in the corresponding number to enter that menu.**")
+
+        return root_template
+
+    def fetch_one(self):
+        one = discord.Embed(title=":gear: Ban Menu", colour=discord.Colour(0x75ae4d))
+        one.set_footer(text="ZoltBot by Genetical", icon_url="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/10/1040a86221334d069c8869b56be4223010c8db0e_full.jpg")
+
+        one.add_field(name=":file_folder: Search for a ban", value="```search [username]```", inline=False)
+        one.add_field(name=":page_facing_up: View a ban", value="```view [id]  ```", inline=False)
+        one.add_field(name=":wrench: Edit a ban", value="```edit [id]```", inline=False)
+        one.add_field(name=":x: Exit the menu", value="```exit```", inline=False)
+
+        return one
