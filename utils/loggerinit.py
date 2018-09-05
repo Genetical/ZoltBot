@@ -36,11 +36,3 @@ class logger(object):
     def warning(self,msg):  self.loggingUnit.logger(msg, "warning" , "log_crit")
     def critical(self,msg): self.loggingUnit.logger(msg, "critical", "log_crit")
     def error(self,msg):    self.loggingUnit.logger(msg, "error"   , "log_crit")
-        
-import os
-log = logger("{}\\..\\logs\\{}".format(os.getcwd(), "critical.log"),"{}\\..\\logs\\{}".format(os.getcwd(), "information.log"))
-log.debug("debug")
-log.info("info")
-log.warning("warning")
-log.critical("critical")
-log.error("error")
