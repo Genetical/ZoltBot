@@ -9,7 +9,7 @@ args = parser.parse_args()
 
 ## Initialise Logging
 from utils.loggerinit import *
-log = initialize_logger()
+log = logger("logs\\critical.log","logs\\information.log")
 
 ## Load extensions
 from utils import *
