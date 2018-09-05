@@ -22,9 +22,10 @@ ZoltBot uses a number of open source projects to work properly:
 
 * [python 3](https://www.python.org/) - The language ZoltBot is written in
 * [discord-rewrite](https://github.com/Rapptz/discord.py/tree/rewrite) - An API wrapper library which ZoltBot uses
-* [argparse](https://docs.python.org/3/library/argparse.html) - A python library allowing command line argument parsing
+
 #### Python  Internal Libraries
 These come preinstalled with python 3
+* [argparse](https://docs.python.org/3/library/argparse.html) - A python library allowing command line argument parsing
 * [asyncio](https://docs.python.org/3/library/asyncio.html) -  A library which allows asynchronous programs
 * [sys](https://docs.python.org/3/library/sys.html) - A python library for accessing and modifiying system variables
 * [logging](https://docs.python.org/3/library/logging.html) - Allows logging within a python program
