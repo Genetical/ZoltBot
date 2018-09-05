@@ -19,7 +19,6 @@ ZoltBot will be a personalised Discord Bot which integrates sub communities in o
 ### Dependencies
 
 ZoltBot uses a number of open source projects to work properly:
-argparse, discord, asyncio, sys, logging, os
 
 * [python 3](https://www.python.org/) - The language ZoltBot is written in
 * [discord-rewrite](https://github.com/Rapptz/discord.py/tree/rewrite) - An API wrapper library which ZoltBot uses
