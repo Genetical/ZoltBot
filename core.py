@@ -31,6 +31,7 @@ async def on_ready():
     print("STATISTICS:",
           f"Created at (UTC) {u.created_at}",
           f"Currently connected to {connected_servers} server(s).", sep="\n")
+    log.info(f"Initialised as {u.name} with ID: {u.id}")
 
 @bot.event
 async def on_message(message):
@@ -43,4 +44,4 @@ async def on_message(message):
 try:
     bot.run(args.token, bot=True, reconnect=True)
 except Exception as e:
-    logger.critical(f"Could not initialise bot. {e}")
+    log.critical(f"Could not initialise bot. {e}")
