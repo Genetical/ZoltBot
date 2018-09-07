@@ -27,7 +27,8 @@ class NoAccountException(Error):
         self.response = response
 
 class ServerResponseException(Error):
-    def __init__(self, response):
+    def __init__(self, code, response):
+        self.status_code = code
         self.response = response
 
 
@@ -36,16 +37,17 @@ def lookup(id):
 
     r = requests.get(URL)
     if (r.headers['Content-Type'] != "application/json") or (r.status_code != 200):
-        if r.status_code != 200:
-            raise ServerResponseException(requests.status_codes._codes[r.status_code][0])
-        else:
-            raise ServerResponseException(r.text)
+        raise ServerResponseException(requests.status_codes._codes[r.status_code][0], r.text)
+        return None
 
     j = r.json()
     if "ERROR" in j.keys():
         err = j["ERROR"]
         if err == "invalid_id":
             raise NoAccountException(id, err)
+        else:
+            raise ServerResponseException(requests.status_codes._codes[r.status_code][0], err)
+        return None
 
     finance = j["zolts_account"]["finance"]
     return account(finance["zc"], finance["items"])
