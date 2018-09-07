@@ -33,14 +33,6 @@ async def on_ready():
           f"Currently connected to {connected_servers} server(s).", sep="\n")
     log.info(f"Initialised as {u.name} with ID: {u.id}")
 
-@bot.event
-async def on_message(message):
-    # Handle points gained for sending messages
-    ## Cache last message from user to stop spam
-    ## Cooldown of 30 seconds
-    ## Add credits
-    bot.process_commands(message)
-
 try:
     bot.run(args.token, bot=True, reconnect=True)
 except Exception as e:
