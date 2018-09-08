@@ -7,6 +7,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("token", help="Must be a valid discord bot token")
 args = parser.parse_args()
 
+
 ## Initialise Logging
 from utils.loggerinit import *
 log = logger("logs\\critical.log","logs\\information.log")
@@ -17,7 +18,7 @@ from utils import *
 bot = commands.Bot(command_prefix="!")
 
 #Rip readability, this lists all file names in the extensions folder, removes the ".*" extension and prefixes with "extensions." it then imports the extension
-print([bot.load_extension(f"extensions.{os.path.splitext(f)[0]}") for f in os.listdir(f"{os.getcwd()}/extensions") if os.path.isfile(os.path.join(f"{os.getcwd()}/extensions", f))])
+[bot.load_extension(f"extensions.{os.path.splitext(f)[0]}") for f in os.listdir(f"{os.getcwd()}/extensions") if os.path.isfile(os.path.join(f"{os.getcwd()}/extensions", f))]
 
 ## Initialise bot
 
@@ -31,7 +32,7 @@ async def on_ready():
     print("STATISTICS:",
           f"Created at (UTC) {u.created_at}",
           f"Currently connected to {connected_servers} server(s).", sep="\n")
-    log.info(f"Initialised as {u.name} with ID: {u.id}")
+    #log.info(f"Initialised as {u.name} with ID: {u.id}")
 
 try:
     bot.run(args.token, bot=True, reconnect=True)
