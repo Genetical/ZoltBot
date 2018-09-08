@@ -5,6 +5,7 @@ import os
 ## Enforce parsing of token argument
 parser = argparse.ArgumentParser()
 parser.add_argument("token", help="Must be a valid discord bot token")
+parser.add_argument("client_key", help="The api client key for zolts.ga")
 args = parser.parse_args()
 
 
@@ -14,6 +15,9 @@ log = logger("logs\\critical.log","logs\\information.log")
 
 ## Load extensions
 from utils import *
+
+api.client_key = args.client_key
+
 
 bot = commands.Bot(command_prefix="!")
 
