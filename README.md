@@ -1,6 +1,6 @@
 # ZoltBot
 
-[![N|Solid](https://i.imgur.com/XYYjfuN.png)](https://zolts.ga)
+[![N|ZoltBot](https://i.imgur.com/XYYjfuN.png)](http://zolts.ga)
 
 ZoltBot will be a personalized Discord Bot which integrates sub communities in one discord server along with a currency system backed by cryptocurrency.
 
