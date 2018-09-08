@@ -9,14 +9,15 @@ class web_accounts:
         self.bot = bot
 
     @commands.command(pass_context=True)
-    async def bank_account(self,ctx):
+    async def account(self,ctx):
         r = utils.api.lookup(ctx.author.id)
+        r.items = ["test item 1", "test item 2", "test item 3"]
         if r.items != None:
-            items = "\n        ".join(r.items)
+            items = "\n".join(r.items)
         else:
             items = "*No items owned*"
 
-        ctx.send(f"You have {round(r.zc, 2)} ZoltCoins and own the following items:\n        {items}")
+        await ctx.send(f":credit_card: **You have *{round(r.zc, 2)}* ZoltCoins and own the following items:**```\n{items}```")
 
 def setup(bot):
     bot.add_cog(web_accounts(bot))
