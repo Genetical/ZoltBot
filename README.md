@@ -22,6 +22,7 @@ ZoltBot uses a number of open source projects to work properly:
 
 * [python 3](https://www.python.org/) - The language ZoltBot is written in
 * [discord-rewrite](https://github.com/Rapptz/discord.py/tree/rewrite) - An API wrapper library which ZoltBot uses
+* [ProfanityFilter](https://github.com/areebbeigh/profanityfilter) - A universal Python library for detecting and/or filtering profane words.
 
 #### Python  Internal Libraries
 These come preinstalled with python 3
