@@ -1,5 +1,5 @@
 import sqlite3
-
+import pickle
 #open("persistence.db", "w").close()
 
 conn = sqlite3.connect("persistence.db")
@@ -14,18 +14,19 @@ start_date real NOT NULL,
 end_date real NOT NULL,
 reason text NOT NULL
 )""")
-for i in range(50):
-    c.execute(f"""INSERT INTO bans(moderator, target, start_date, end_date, reason)
-    VALUES
-    (
-    "test",
-    "target",
-    datetime("now"),
-    datetime(1536842125, 'unixepoch', 'localtime'),
-    "{i}"
-    )""")
 
-    conn.commit()
+command = """INSERT INTO bans(moderator, target, start_date, end_date, reason) VALUES (?,?,datetime('now'),datetime(?, 'unixepoch', 'localtime'),?)"""
 
-    for item in c.execute("""SELECT * FROM bans""").fetchall():
-        print(item)
+c.execute(command, (
+  pickle.dumps("moderator"), 
+  pickle.dumps("target"),
+  1536842125,
+  "Test reason"
+  ))
+conn.commit()
+
+for item in c.execute("""SELECT * FROM bans""").fetchall():
+      item = dict(zip(list(map(lambda x: x[0], c.description)), item))
+      item["moderator"] = pickle.loads(item["moderator"])
+      item["target"] = pickle.loads(item["target"])
+      
