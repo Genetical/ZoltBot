@@ -30,6 +30,8 @@ These come preinstalled with python 3
 * [sys](https://docs.python.org/3/library/sys.html) - A python library for accessing and modifying system variables
 * [logging](https://docs.python.org/3/library/logging.html) - Allows logging within a python program
 * [os](https://docs.python.org/3/library/os.html) - Provides better OS functionality
+* [pickle](https://docs.python.org/3/library/pickle.html) - Implements binary protocols for serializing and de-serializing a Python object structure.
+* [sqlite3](https://docs.python.org/3/library/sqlite3.html) - Provides a lightweight disk-based database that doesn’t require a separate server process.
 
 
 ### Installation
