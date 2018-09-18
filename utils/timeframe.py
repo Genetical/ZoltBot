@@ -1,5 +1,4 @@
-import re
-
+import re, calendar, time
 translations = {("s","sec","secs","second","seconds"):1,
                 ("m","min","mins","minute","minutes"):60,
                 ("h","hour","hours"):3600,
@@ -13,8 +12,5 @@ def convert(raw):
 
     for keys, value in translations.items():
         if timeframe in keys:
-            return int(duration)*translations[keys]
+            return (calendar.timegm(time.gmtime())) + (int(duration)*translations[keys])
     raise KeyError(f"Timeframe '{timeframe}' not found. Type !help timeframes for a list.")
-
-    
-
