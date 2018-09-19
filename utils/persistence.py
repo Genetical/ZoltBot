@@ -18,21 +18,35 @@ start_date real NOT NULL,
 end_date real NOT NULL,
 reason text NOT NULL
 )""")
+
 def ban(moderator, target, length, reason):
-    command = """INSERT INTO bans(moderator, target, start_date, end_date, reason) VALUES (?,?,datetime('now'),datetime(?, 'unixepoch', 'localtime'),?)"""
+    command = """INSERT INTO bans
+    (moderator, target, start_date, end_date, reason)
+    VALUES (?,?,datetime('now'),datetime(?, 'unixepoch', 'localtime'),?)"""
 
     c.execute(command, (
       pickle.dumps(moderator),
       pickle.dumps(target),
-      timeframe(length),
+      timeframe.convert(length),
       reason
       ))
     conn.commit()
 
-def fetch_ban():
-    output = []
-    for item in c.execute("""SELECT * FROM bans""").fetchall():
-          item = dict(zip(list(map(lambda x: x[0], c.description)), item))
+def fetch_ban(filter=None, discriminator=None):
+    command = """SELECT * FROM bans"""
+    translator = {
+    "moderator":" WHERE moderator=?",
+    "target":" WHERE target=?",
+    }
+
+    if filter =! None:
+        try:
+            command += translator[discriminator]
+        except KeyError:
+            raise KeyError(f"Discriminator {discriminator} not found.")
+
+    for item in c.execute(command).fetchall():
+          item = dict(zip(list(map(lambda x: x[0], c.description)), item)) # Converts list to dict with keys being db columns
           item["moderator"] = pickle.loads(item["moderator"])
           item["target"] = pickle.loads(item["target"])
           output.append(item)
