@@ -11,7 +11,8 @@ class events_core:
         self.bot = bot
 
     async def on_message(self, message):
-        print("",end="")
+        pass
+        # TODO:
         # Handle points gained for sending messages
         ## Cache last message from user to stop spam
         ## Cooldown of 30 seconds
