@@ -11,7 +11,6 @@ class web_accounts:
     @commands.command(pass_context=True)
     async def account(self,ctx):
         r = utils.api.lookup(ctx.author.id)
-        r.items = ["test item 1", "test item 2", "test item 3"]
         if r.items != None:
             items = "\n".join(r.items)
         else:
