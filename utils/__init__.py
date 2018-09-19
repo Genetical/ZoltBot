@@ -4,4 +4,4 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=__path__, prefix=__na
       try:
             __import__(modname)
       except Exception as e:
-            print(f"Modile {modname} failed to load")
+            print(f"Module {modname} failed to load")
