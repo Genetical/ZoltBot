@@ -27,6 +27,10 @@ warning_time real NOT NULL,
 reason text NOT NULL
 )""")
 
+c.execute("""CREATE TABLE IF NOT EXISTS tags (
+tag_id integer NOT NULL
+)""")
+
 def ban(moderator, target, length, reason):
     command = """INSERT INTO bans
     (moderator, target, start_date, end_date, reason)
@@ -99,7 +103,7 @@ def warn(moderator, target, reason):
                         reason))
     return f"Warned user successfully!"
 
-def find_warnings(mode="user",user):
+def find_warnings(user, mode="user"):
     if mode == "user":
         all_warnings = c.execute("SELECT * FROM warnings WHERE target=(?)", (user.id,))
     elif mode == "moderator":
@@ -112,3 +116,42 @@ def find_warnings(mode="user",user):
         reason    = warning["reason"]
         warnings_output.append(f"```md\n[{moderator}] warned ({target}) on {time} for {reason}```")
     return "\n".join(warnings_output)
+
+def add_tag(role_id):
+    command = """INSERT INTO tags VALUES (?)"""
+    try:
+        if (role_id,) not in c.execute("""SELECT tag_id FROM tags""").fetchall():
+            c.execute(command, (role_id,))
+            conn.commit()
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+    return True
+
+
+def del_tag(role_id):
+    command = """DELETE FROM tags WHERE tag_id=?"""
+    try:
+        if (role_id,) in c.execute("""SELECT tag_id FROM tags""").fetchall():
+            c.execute(command, (role_id,))
+            conn.commit()
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+    return True
+
+def verify_tag(role_id):
+    if (role_id,) in c.execute("""SELECT tag_id FROM tags""").fetchall():
+        return True
+    else:
+        return False
+
+def dump_tags():
+    try:
+        return [str(row[0]) for row in c.execute("""SELECT tag_id FROM tags""").fetchall()]
+    except:
+        return False
