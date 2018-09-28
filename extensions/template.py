@@ -13,7 +13,7 @@ class template:
     @commands.command(pass_context=True)
     @commands.has_permissions(administrator=True)
     async def ping(self,ctx):
-        await ctx.channel.send(utils.pong.ping())
+        pass
 
 def setup(bot):
     bot.add_cog(template(bot))
