@@ -13,7 +13,7 @@ class web_accounts:
         r = utils.api.lookup(ctx.author.id)
 
         if r.items != None:
-            "\n".join([item["name"] for item in r.items])
+            items = "\n".join([item["name"] for item in r.items])
         else:
             items = "*No items owned*"
 
