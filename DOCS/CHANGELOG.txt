@@ -1,0 +1,12 @@
+Correct format for changelog
+
+DATE (DD/MM/YYYY) - CHANGE VERSION NUMBER (REFER ./"VERSION IDENTIFIER.txt"): (+,-,*) NEW ADDITION, ADDITION REMOVAL, CHANGE
+
+Example:
+
+29/09/2018 - v1.1beta:
++ Added CHANGELOG.txt
++ Added VERSION IDENTIFIER
+* Moved all documentation into new DOCS folder
+* Fixed typos in CODE_OF_CONDUCT.txt
+- Removed Herobrine ## Example
