@@ -13,4 +13,4 @@ Position_4: None -- Specifies minor bug fixes
 Position_5: None -- Minor changes such as typos or output messages
 
 Current version:
-v1.0beta
+v1.0.0.1beta
