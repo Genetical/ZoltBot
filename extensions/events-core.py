@@ -12,6 +12,7 @@ class events_core:
 
     async def on_message(self, message):
         pass
+        
         # TODO:
         # Handle points gained for sending messages
         ## Cache last message from user to stop spam

@@ -7,8 +7,8 @@ Version number breakdown:
 
 Position_0: "1" -- Specifies major release such as large content releases
 Position_1: "0" -- Specifies minor releases such as just one piece of content or rework
-Position_2: None -- Specifies severe bug fixes
-Position_3: None -- Specifies general bug fixes
+Position_2: "0" -- Specifies severe bug fixes
+Position_3: "1" -- Specifies general bug fixes
 Position_4: None -- Specifies minor bug fixes
 Position_5: None -- Minor changes such as typos or output messages
 
