@@ -1,5 +1,4 @@
 import discord
-import asyncio
 import sys
 sys.path.append("..")
 import utils
