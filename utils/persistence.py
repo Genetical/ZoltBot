@@ -1,7 +1,8 @@
 import sqlite3
 import pickle
 import sys
-import sqlite3
+import calendar
+import time
 sys.path.append("..")
 from utils import timeframe
 #open("persistence.db", "w").close()
@@ -51,7 +52,7 @@ def ban(moderator, target, length, reason):
     conn.commit()
 
 def fetch_ban(moderator=None, target=None, limit=10):
-    import calendar, time
+
     current_time = calendar.timegm(time.gmtime())
 
     # Generate sqlite command and append extra filter if two arguments parsed (moderator and target)
@@ -137,18 +138,16 @@ def del_tag(role_id):
         if (role_id,) in c.execute("""SELECT tag_id FROM tags""").fetchall():
             c.execute(command, (role_id,))
             conn.commit()
-        else:
-            return False
+            return True
     except Exception as e:
         print(e)
+        
+    finally:
         return False
-    return True
+    
 
 def verify_tag(role_id):
-    if (role_id,) in c.execute("""SELECT tag_id FROM tags""").fetchall():
-        return True
-    else:
-        return False
+    return bool((role_id,) in c.execute("""SELECT tag_id FROM tags""").fetchall())
 
 def dump_tags():
     try:

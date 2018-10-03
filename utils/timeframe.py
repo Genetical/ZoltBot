@@ -1,4 +1,6 @@
-import re, calendar, time
+import re
+import calendar
+import time
 translations = {("s","sec","secs","second","seconds"):1,
                 ("m","min","mins","minute","minutes"):60,
                 ("h","hour","hours"):3600,

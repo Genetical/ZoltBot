@@ -1,4 +1,6 @@
-import discord, asyncio, sys
+import discord
+import asyncio
+import sys
 sys.path.append("..")
 import utils
 from discord.ext import commands
@@ -12,7 +14,7 @@ class filters:
 
     async def on_member_join(self, member):
         invites = re.findall("discord.gg/([^\s]+)", member.display_name)
-        if len(invites) != 0:
+        if invites:
             for invite in invites:
                 try:
                     invite = await self.bot.get_invite(invite)
@@ -25,7 +27,7 @@ class filters:
 
     async def on_message(self, message):
         invites = re.findall("discord.gg/([^\s]+)", message.content)
-        if len(invites) != 0:
+        if invites:
             for invite in invites:
                 try:
                     invite = await self.bot.get_invite(invite)

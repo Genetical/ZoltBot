@@ -1,4 +1,7 @@
-import argparse, discord, asyncio, sys, logging
+import argparse
+import discord
+import asyncio
+import sys
 from discord.ext import commands
 import os
 
@@ -8,10 +11,6 @@ parser.add_argument("token", help="Must be a valid discord bot token")
 parser.add_argument("client_key", help="The api client key for zolts.ga")
 args = parser.parse_args()
 
-
-## Initialise Logging
-from utils.loggerinit import *
-log = logger("logs\\critical.log","logs\\information.log")
 
 ## Load extensions
 from utils import *

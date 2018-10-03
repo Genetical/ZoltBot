@@ -1,4 +1,6 @@
-import discord, asyncio, sys
+import discord
+import asyncio
+import sys
 sys.path.append("..")
 import utils
 from discord.ext import commands

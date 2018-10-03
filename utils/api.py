@@ -1,15 +1,15 @@
 import requests
 client_key="REDACTED"
 
-class account:
+class zc_account:
     def __init__(self, zc, items):
 
-        if zc == None:
+        if zc is None:
             self.zc = 0
         else:
             self.zc = zc
 
-        if len(items) == 0:
+        if not items:
             self.items = None
         else:
             self.items = items
@@ -38,7 +38,6 @@ def lookup(id):
     r = requests.get(URL)
     if (r.headers['Content-Type'] != "application/json") or (r.status_code != 200):
         raise ServerResponseException(requests.status_codes._codes[r.status_code][0], r.text)
-        return None
 
     j = r.json()
     if "ERROR" in j.keys():
@@ -47,7 +46,6 @@ def lookup(id):
             raise NoAccountException(id, err)
         else:
             raise ServerResponseException(requests.status_codes._codes[r.status_code][0], err)
-        return None
 
     finance = j["zolts_account"]["finance"]
-    return account(finance["zc"], finance["items"])
+    return zc_account(finance["zc"], finance["items"])
