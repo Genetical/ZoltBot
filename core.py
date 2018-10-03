@@ -1,7 +1,4 @@
 import argparse
-import discord
-import asyncio
-import sys
 from discord.ext import commands
 import os
 
