@@ -60,6 +60,7 @@ class web_accounts:
         await ctx.send(f":credit_card: ** | You have *{round(r.zc, 2)}* ZoltCoins and own the following items:**```\n{items}```")
 
     @commands.command(pass_context=True)
+    @commands.has_permissions(administrator=True)
     async def setup(self,ctx):
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Generating embed")
 
