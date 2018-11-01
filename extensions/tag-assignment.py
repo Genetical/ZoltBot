@@ -10,11 +10,13 @@ import os
 class tag_assignment:
     def __init__(self, bot):
         self.bot = bot
+        self.converter = commands.RoleConverter()
 
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def tag(self, ctx, *role):
-        role = commands.RoleConverter.convert(ctx, " ".join(role))
+        argument = " ".join(role)
+        role = await self.converter.convert(ctx=ctx, argument=argument)
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Saving role *{role.name}*")
         if role.permissions.value != 0:
             await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to add tag *{role.name}*. Only roles with no permissions can be used as tags", delete_after=5)
@@ -30,7 +32,8 @@ class tag_assignment:
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def rtag(self, ctx, *role):
-        role = commands.RoleConverter.convert(ctx, " ".join(role))
+        argument = " ".join(role)
+        role = await self.converter.convert(ctx=ctx, argument=argument)
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Removing role *{role.name}*")
 
         if utils.persistence.del_tag(role.id):
@@ -41,7 +44,8 @@ class tag_assignment:
 
     @commands.command(pass_context=True)
     async def assign(self, ctx, *role):
-        role = commands.RoleConverter.convert(ctx, " ".join(role))
+        argument = " ".join(role)
+        role = await self.converter.convert(ctx=ctx, argument=argument)
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Finding role *{role.name}*")
         if utils.persistence.verify_tag(role.id):
             await ctx.author.add_roles(role)
@@ -52,7 +56,9 @@ class tag_assignment:
 
     @commands.command(pass_context=True)
     async def unassign(self, ctx, *role):
-        role = commands.RoleConverter.convert(ctx, " ".join(role))
+        argument = " ".join(role)
+        role = await self.converter.convert(ctx=ctx, argument=argument)
+
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Finding role *{role.name}*")
         if utils.persistence.verify_tag(role.id):
             await ctx.author.remove_roles(role)
