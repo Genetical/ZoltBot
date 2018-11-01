@@ -1,7 +1,5 @@
 import sqlite3
 import sys
-import calendar
-import time
 sys.path.append("..")
 from utils import timeframe
 #open("persistence.db", "w").close()

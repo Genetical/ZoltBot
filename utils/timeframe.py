@@ -12,7 +12,7 @@ translations = {("s","sec","secs","second","seconds"):1,
 def convert(raw):
     duration, timeframe = list(filter(None, re.split('(\d+)',raw)))
 
-    for keys, value in translations.items():
+    for keys, _ in translations.items():
         if timeframe in keys:
             return (calendar.timegm(time.gmtime())) + (int(duration)*translations[keys])
     raise KeyError(f"Timeframe '{timeframe}' not found. Type !help timeframes for a list.")

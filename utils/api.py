@@ -22,8 +22,8 @@ class Error(Exception):
     pass
 
 class NoAccountException(Error):
-    def __init__(self, id, response):
-        self.id = id
+    def __init__(self, _id, response):
+        self.id = _id
         self.response = response
 
 class ServerResponseException(Error):
@@ -32,8 +32,8 @@ class ServerResponseException(Error):
         self.response = response
 
 
-def lookup(id):
-    URL = f"https://www.zolts.ga/api/check/get_user?client_key={client_key}&id={id}"
+def lookup(_id):
+    URL = f"https://www.zolts.ga/api/check/get_user?client_key={client_key}&id={_id}"
 
     r = requests.get(URL)
     if (r.headers['Content-Type'] != "application/json") or (r.status_code != 200):
