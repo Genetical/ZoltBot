@@ -39,4 +39,4 @@ async def on_ready():
 try:
     bot.run(args.token, bot=True, reconnect=True)
 except Exception as e:
-    log.critical(f"Could not initialise bot. {e}")
+    print(f"Could not initialise bot. {e}")
