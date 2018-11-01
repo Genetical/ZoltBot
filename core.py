@@ -10,9 +10,9 @@ args = parser.parse_args()
 
 
 ## Load extensions
-from utils import *
+import utils
 
-api.client_key = args.client_key
+utils.api.client_key = args.client_key
 
 
 bot = commands.Bot(command_prefix="!")
