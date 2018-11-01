@@ -5,7 +5,7 @@ import utils
 from discord.ext import commands
 import os
 import asyncio
-import times
+import time
 
 
 class statistics:
