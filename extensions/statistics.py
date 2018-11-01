@@ -14,6 +14,8 @@ class statistics:
         self.bot = bot
         self.command_counter = 0
         self.message_counter = 0
+        self.command_errors = 0
+        self.last_error = "No errors so far!"
 
     async def stats(self, start_time):
         await asyncio.sleep(5)
@@ -22,6 +24,7 @@ class statistics:
             print(f"Time since execution: {round(time.time() - start_time, 0)} seconds")
             print(f"Messages caught since executed: {self.message_counter}")
             print(f"Commands ran since execution: {self.command_counter}",end="\n\n")
+            print(f"There have been {self.command_errors} errors since launch, last error:\n{self.last_error}")
 
             await asyncio.sleep(1)
 
@@ -32,8 +35,12 @@ class statistics:
     async def on_message(self, message):
         self.message_counter += 1
 
-    async def on_command(self, message):
+    async def on_command(self, ctx):
         self.command_counter += 1
+
+    async def on_command_error(ctx, error):
+        self.command_errors += 1
+        self.last_error = f"Command: {ctx.command}\nMessage:{ctx.args}\nError:{error}"
 
 def setup(bot):
     bot.add_cog(statistics(bot))
