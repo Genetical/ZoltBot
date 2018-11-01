@@ -13,7 +13,8 @@ class tag_assignment:
 
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
-    async def tag(self, ctx, role: discord.Role):
+    async def tag(self, ctx, *role):
+        role = commands.RoleConverter.convert(ctx, " ".join(role))
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Saving role *{role.name}*")
         if role.permissions.value != 0:
             await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to add tag *{role.name}*. Only roles with no permissions can be used as tags", delete_after=5)
@@ -28,7 +29,8 @@ class tag_assignment:
 
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
-    async def rtag(self, ctx, role: discord.Role):
+    async def rtag(self, ctx, *role):
+        role = commands.RoleConverter.convert(ctx, " ".join(role))
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Removing role *{role.name}*")
 
         if utils.persistence.del_tag(role.id):
@@ -38,7 +40,8 @@ class tag_assignment:
             await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to remove tag *{role.name}*. This is probably to do with the database. <@&388020265222668288>")
 
     @commands.command(pass_context=True)
-    async def assign(self, ctx, role: discord.Role):
+    async def assign(self, ctx, *role):
+        role = commands.RoleConverter.convert(ctx, " ".join(role))
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Finding role *{role.name}*")
         if utils.persistence.verify_tag(role.id):
             await ctx.author.add_roles(role)
@@ -48,7 +51,8 @@ class tag_assignment:
         ctx.message.delete()
 
     @commands.command(pass_context=True)
-    async def unassign(self, ctx, role: discord.Role):
+    async def unassign(self, ctx, *role):
+        role = commands.RoleConverter.convert(ctx, " ".join(role))
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Finding role *{role.name}*")
         if utils.persistence.verify_tag(role.id):
             await ctx.author.remove_roles(role)
@@ -56,7 +60,7 @@ class tag_assignment:
         else:
             await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to Unassign tag *{role.name}*. This may be because you are not authorised to Unassign this tag.", delete_after=5)
         ctx.message.delete()
-        
+
     @commands.command(pass_context=True)
     async def tags(self, ctx):
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Fetching roles")
