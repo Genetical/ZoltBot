@@ -17,7 +17,8 @@ api.client_key = args.client_key
 
 bot = commands.Bot(command_prefix="!")
 
-#Rip readability, this lists all file names in the extensions folder, removes the ".*" extension and prefixes with "extensions." it then imports the extension
+#Rip readability, this lists all file names in the extensions folder, removes
+# the ".*" extension and prefixes with "extensions." it then imports the extension
 [bot.load_extension(f"extensions.{os.path.splitext(f)[0]}") for f in os.listdir(f"{os.getcwd()}/extensions") if os.path.isfile(os.path.join(f"{os.getcwd()}/extensions", f))]
 
 ## Initialise bot
@@ -32,6 +33,7 @@ async def on_ready():
     print("STATISTICS:",
           f"Created at (UTC) {u.created_at}",
           f"Currently connected to {connected_servers} server(s).", sep="\n")
+
     #log.info(f"Initialised as {u.name} with ID: {u.id}")
 
 try:
