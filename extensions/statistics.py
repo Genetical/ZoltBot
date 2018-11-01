@@ -14,8 +14,6 @@ class statistics:
         self.bot = bot
         self.command_counter = 0
         self.message_counter = 0
-        self.pid = os.getpid()
-        self.py = psutil.Process(self.pid)
 
     async def stats(self, start_time):
         await asyncio.sleep(5)
