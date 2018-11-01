@@ -35,7 +35,7 @@ class statistics:
     async def on_command(self, ctx):
         self.command_counter += 1
 
-    async def on_command_error(ctx, error):
+    async def on_command_error(self, ctx, error):
         self.command_errors += 1
         self.last_error = f"Command: {ctx.command}\nMessage:{ctx.args}\nError:{error}"
 
