@@ -1,5 +1,4 @@
 import sqlite3
-import pickle
 import sys
 import calendar
 import time
@@ -53,7 +52,7 @@ def ban(moderator, target, length, reason):
 
 def fetch_ban(moderator=None, target=None, limit=10):
 
-    current_time = calendar.timegm(time.gmtime())
+    #current_time = calendar.timegm(time.gmtime()) Unused - Reason?
 
     # Generate sqlite command and append extra filter if two arguments parsed (moderator and target)
     command = """SELECT (moderator, target, start_date, end_date, reason) FROM bans"""
@@ -92,7 +91,7 @@ def remove_ban(user: str):
         try:
             c.execute(command, (user,))
             return "Ban removed successfully!"
-        except Exception as error:
+        except Exception:
             raise Exception(f"There was a problem removing the ban on {user}. Please try again later.")
     else:
         raise Exception(f"There was a problem removing the ban on {user}, are you sure they're banned?")
@@ -141,10 +140,9 @@ def del_tag(role_id):
             return True
     except Exception as e:
         print(e)
-        
     finally:
         return False
-    
+
 
 def verify_tag(role_id):
     return bool((role_id,) in c.execute("""SELECT tag_id FROM tags""").fetchall())

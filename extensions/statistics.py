@@ -1,9 +1,6 @@
-import discord
 import sys
 sys.path.append("..")
 import utils
-from discord.ext import commands
-import os
 import asyncio
 import time
 

@@ -1,14 +1,13 @@
 # Ok, this needs needs to hold ui's and fetch the necessary data from the database
 # Also, we need a database
 
-from discord import Embed
 
 # TODO:
 # 1) Create menu templates
 
 class ban_menu:
     ## Store template for root menu, xml version can be found in ./ui_xml_templates.txt
-
+    @staticmethod
     def fetch_root(self):
         root_template = discord.Embed(title=":gear: Ban Menu", colour=discord.Colour(0x75ae4d))
         root_template.set_footer(text="ZoltBot by Genetical", icon_url="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/10/1040a86221334d069c8869b56be4223010c8db0e_full.jpg")
@@ -31,6 +30,7 @@ class ban_menu:
 
         return root_template
 
+    @staticmethod
     def fetch_one(self):
         one = discord.Embed(title=":gear: Ban Menu", colour=discord.Colour(0x75ae4d))
         one.set_footer(text="ZoltBot by Genetical", icon_url="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/10/1040a86221334d069c8869b56be4223010c8db0e_full.jpg")
