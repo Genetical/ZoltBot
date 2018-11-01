@@ -5,8 +5,7 @@ import utils
 from discord.ext import commands
 import os
 import asyncio
-import time
-import psutil
+import times
 
 
 class statistics:
@@ -25,9 +24,6 @@ class statistics:
             print(f"Time since execution: {round(time.time() - start_time, 0)} seconds")
             print(f"Messages caught since executed: {self.message_counter}")
             print(f"Commands ran since execution: {self.command_counter}",end="\n\n")
-            print("=" * 50)
-            print(f"Memory usage: {round(self.py.memory_info()[0]/2.**30, 2)} GB")
-            print(f"CPU Usage: {psutil.cpu_percent()}%")
 
             await asyncio.sleep(1)
 
