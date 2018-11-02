@@ -18,7 +18,7 @@ class statistics:
         await asyncio.sleep(5)
         while True:
             utils.terminal.clear()
-            print(f"Time since execution: {round(time.time() - start_time, 0)} seconds")
+            print(f"Time since execution: {utils.timeframe.seconds(int(time.time() - start_time))}")
             print(f"Messages caught since executed: {self.message_counter}")
             print(f"Commands ran since execution: {self.command_counter}",end="\n\n")
             print(f"There have been {self.command_errors} errors since launch, last error:\n{self.last_error}")
