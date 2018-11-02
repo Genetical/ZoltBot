@@ -18,7 +18,7 @@ utils.api.client_key = args.client_key
 bot = commands.Bot(command_prefix="!")
 
 #Rip readability, this lists all file names in the extensions folder, removes
-# the ".*" extension and prefixes with "extensions." it then imports the extension
+# the ".*" extension and prefixes with "extensions." it then imports the extension. P.S Che did something annoying
 [bot.load_extension(f"extensions.{os.path.splitext(f)[0]}") for f in os.listdir(f"{os.getcwd()}/extensions") if os.path.isfile(os.path.join(f"{os.getcwd()}/extensions", f))]
 
 ## Initialise bot
