@@ -16,7 +16,7 @@ class development:
     @commands.check(is_owner)
     async def reload(self,ctx):
         ctx.send("Reloading! This may take up to 30 seconds.")
-        os.system("sleep 5s && git pull && ./run.sh")
+        os.system("printf '\n\n' & sleep 5s && git pull && ./run.sh")
         quit()
 
 def setup(bot):

@@ -22,10 +22,11 @@ class statistics:
         self.start_time = start_time
         while True:
             utils.terminal.clear()
-            print(f"Time since execution: {utils.timeframe.seconds(int(time.time() - start_time))}")
+            uptime = utils.timeframe.seconds(int(time.time() - start_time))
+            messages = self.message_counter
             print(f"\nMessages caught since executed: {self.message_counter}")
             print(f"Commands ran since execution: {self.command_counter}",end="\n\n")
-            print(f"There have been {self.command_errors} errors since launch, last error:\n{self.last_error}\n\n\n")
+            print(f"There have been {self.command_errors} errors since launch, last error:\n\n{self.last_error}\n\n\n")
             print(f"Type in any server, '!reload' to restart and update the bot to the latest version")
 
             await asyncio.sleep(1)
