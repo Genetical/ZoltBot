@@ -24,6 +24,7 @@ class statistics:
             utils.terminal.clear()
             uptime = utils.timeframe.seconds(int(time.time() - start_time))
             messages = self.message_counter
+            print(f"Time since execution: {uptime}")
             print(f"\nMessages caught since executed: {self.message_counter}")
             print(f"Commands ran since execution: {self.command_counter}",end="\n\n")
             print(f"There have been {self.command_errors} errors since launch, last error:\n\n{self.last_error}\n\n\n")
