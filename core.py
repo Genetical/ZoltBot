@@ -1,6 +1,9 @@
 import argparse
 from discord.ext import commands
 import os
+global DEBUG
+
+os.environ["DEBUG"] = "False" # Would be actual bool but environment vars cant be
 
 ## Enforce parsing of token argument
 parser = argparse.ArgumentParser()

@@ -1,4 +1,5 @@
 import sys
+import os
 sys.path.append("..")
 import utils
 import asyncio
@@ -21,8 +22,10 @@ class statistics:
     async def stats(self, start_time):
         await asyncio.sleep(5)
         self.start_time = start_time
+
         while True:
-            break
+            if os.environ["DEBUG"] == "True":
+                break
             utils.terminal.clear()
             uptime = utils.timeframe.seconds(int(time.time() - start_time))
             messages = self.message_counter
