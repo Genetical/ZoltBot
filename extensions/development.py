@@ -28,7 +28,9 @@ class development:
         """Reloads the bot
 
         [p]**reload**: Restarts the bot with the most updated push."""
-        ctx.send("Reloading! This may take up to 30 seconds.")
+
+        await ctx.send("Reloading! This may take up to 30 seconds.")
+        asyncio.sleep(5)
         os.system("printf '\n\n' & sleep 5s && git pull && ./run.sh")
         quit()
 
