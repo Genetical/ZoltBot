@@ -15,7 +15,7 @@ now = datetime.now()
 
 
 async def is_owner(ctx):
-    return ctx.author.id == 173494216263991296
+    return ctx.author.id in (173494216263991296, 303953507889840129)
 
 class development:
     def __init__(self, bot):
