@@ -7,6 +7,7 @@ import re
 class filters:
     def __init__(self, bot):
         self.bot = bot
+        self.name = "Filters"
 
     async def on_member_join(self, member):
         invites = re.findall("discord.gg/([^\s]+)", member.display_name)

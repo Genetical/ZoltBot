@@ -11,10 +11,15 @@ class tag_assignment:
     def __init__(self, bot):
         self.bot = bot
         self.converter = commands.RoleConverter()
+        self.name = "Tag assignment"
 
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def tag(self, ctx, *role):
+        """Adds a community tag.
+
+        [p]**tag** role: Assigns a role as a tag.
+        """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Saving role *{role.name}*")
@@ -32,6 +37,10 @@ class tag_assignment:
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
     async def rtag(self, ctx, *role):
+        """Removes a tag.
+
+        [p]**rtag** tag: Unassigns a role as a tag.
+        """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Removing role *{role.name}*")
@@ -44,6 +53,10 @@ class tag_assignment:
 
     @commands.command(pass_context=True)
     async def assign(self, ctx, *role):
+        """Assigns a tag.
+
+        [p]**assign** tag: Gives you the chosen tag.
+        """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Finding role *{role.name}*")
@@ -56,6 +69,10 @@ class tag_assignment:
 
     @commands.command(pass_context=True)
     async def unassign(self, ctx, *role):
+        """Unssigns a tag.
+
+        [p]**unassign** tag: Removes the chosen tag.
+        """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
 
@@ -69,6 +86,10 @@ class tag_assignment:
 
     @commands.command(pass_context=True)
     async def tags(self, ctx):
+        """Lists all tags.
+
+        [p]**list**: Provides a list of all assigned tags.
+        """
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Fetching roles")
 
         end = []

@@ -10,10 +10,14 @@ import os
 class community:
     def __init__(self, bot):
         self.bot = bot
+        self.name = "Communities"
 
     @commands.command(pass_context=True)
     @commands.has_permissions(administrator=True)
     async def create_community(self, ctx, name):
+        """Creates a community
+
+        [p]**create_community**: Will setup a community role and private channel."""
         return
         overwrites = {
         ctx.guild.default_role: discord.PermissionOverwrite(read_messages=False, send_messages=False),

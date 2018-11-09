@@ -61,6 +61,7 @@ class Help(formatter.HelpFormatter):
     """Formats help for commands."""
 
     def __init__(self, bot, *args, **kwargs):
+        self.name = "Help"
         self.bot = bot
         global orig_help
         orig_help = bot.get_command('help')
@@ -200,7 +201,11 @@ class Help(formatter.HelpFormatter):
 
         def category(tup):
             # Turn get cog (Category) name from cog/list tuples
-            cog = tup[1].cog_name
+            try:
+                cog = (tup[1].instance.name)
+            except AttributeError:
+                cog = tup[1].cog_name
+
             return '**__{0}:__**'.format(cog) if cog is not None else '**__\u200bNo Category:__**'
 
         # Get subcommands for bot or category

@@ -20,14 +20,19 @@ async def is_owner(ctx):
 class development:
     def __init__(self, bot):
         self.bot = bot
+        self.name = "Development"
 
     @commands.command(pass_context=True)
     @commands.check(is_owner)
     async def reload(self,ctx):
+        """Reloads the bot
+
+        [p]**reload**: Restarts the bot with the most updated push."""
         ctx.send("Reloading! This may take up to 30 seconds.")
         os.system("printf '\n\n' & sleep 5s && git pull && ./run.sh")
         quit()
 
+"""
     @commands.command(pass_context=True)
     @commands.check(is_owner)
     async def countdown(self,ctx):
@@ -41,7 +46,7 @@ class development:
             await asyncio.sleep(1)
 
         await msg.delete()
-        await ctx.send("<@&466222227449184256>\n\nThe BETA has begun!")
+        await ctx.send("<@&466222227449184256>\n\nThe BETA has begun!")"""
 
 def setup(bot):
     bot.add_cog(development(bot))

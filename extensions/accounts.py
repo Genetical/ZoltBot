@@ -19,9 +19,13 @@ empty = u'\u200b'
 class web_accounts:
     def __init__(self, bot):
         self.bot = bot
+        self.name = "Accounts"
 
     @commands.command(pass_context=True)
     async def link(self,ctx):
+        """Begins account linking process.
+
+        [p]**link**: Will take you through the steps to link your account to our servers."""
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Loading...")
         try:
             r = utils.api.lookup(ctx.author.id)
@@ -47,6 +51,9 @@ class web_accounts:
 
     @commands.command(pass_context=True)
     async def account(self,ctx):
+        """Shows your account
+
+        [p]**account**: Will show how many ZC you have and your purchased items."""
         try:
             r = utils.api.lookup(ctx.author.id)
         except utils.api.NoAccountException:
@@ -62,6 +69,9 @@ class web_accounts:
     @commands.command(pass_context=True)
     @commands.has_permissions(administrator=True)
     async def setup(self,ctx):
+        """Sets up the notice for !link
+
+        [p]**setup**: Will build the embed on the command."""
         temp = await ctx.send(f"<a:loading:495280632067522600> **|** Generating embed")
 
 

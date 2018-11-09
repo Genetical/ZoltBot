@@ -16,11 +16,13 @@ class statistics:
         self.message_counter = 0
         self.command_errors = 0
         self.last_error = "No errors so far!"
+        self.name = "Statistics"
 
     async def stats(self, start_time):
         await asyncio.sleep(5)
         self.start_time = start_time
         while True:
+            break
             utils.terminal.clear()
             uptime = utils.timeframe.seconds(int(time.time() - start_time))
             messages = self.message_counter
@@ -49,6 +51,10 @@ class statistics:
     @commands.command(pass_context=True, name='stats')
     @commands.check(is_owner)
     async def statistics(self, ctx):
+        """Gives bot statistics.
+
+        [p]**stats** Shows statistics on the bot such as uptime and usage.
+        """
         a = (f"**Time since execution:** *{utils.timeframe.seconds(int(time.time() - self.start_time))}*")
         a += (f"\n**Messages caught since executed:** {self.message_counter}")
         a += (f"\n**Commands ran since execution:** {self.command_counter}\n")
