@@ -24,6 +24,8 @@ bot = commands.Bot(command_prefix="!")
 # the ".*" extension and prefixes with "extensions." it then imports the extension. P.S Che did something annoying
 [bot.load_extension(f"extensions.{os.path.splitext(f)[0]}") for f in os.listdir(f"{os.getcwd()}/extensions") if os.path.isfile(os.path.join(f"{os.getcwd()}/extensions", f))]
 
+if os.environ["DEBUG"] == "True":
+    bot.unload_extension("extensions.statistics")
 ## Initialise bot
 
 @bot.event
