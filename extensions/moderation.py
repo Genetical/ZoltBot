@@ -1,8 +1,9 @@
 import sys
 sys.path.append("..")
+import utils
 from discord.ext import commands
 
-
+localise = utils.localisation.localise
 class moderation:
     def __init__(self, bot):
         self.bot = bot
@@ -16,19 +17,19 @@ class moderation:
         [p]**prune** amount: Deletes an amount of messages from latest to earliest.
         """
         if type(amount) != int:
-            ctx.send(f"<:xmark:495282541347995667> **|** {amount} isn't a number!")
+            ctx.send(localise("MODERATION_PRUNE_FAIL_INT", amount=amount))
             return
 
         deletable = []
         async for message in ctx.channel.history(limit=amount):
             deletable.append(message)
 
-        m = await ctx.send(f"<a:loading:495280632067522600> **|** Deleting {amount} message{'s' if amount != 1 else ''}")
+        m = await ctx.send(localise("MODERATION_PRUNE_DELETING", amount=amount))
 
         for message in deletable:
             await message.delete()
 
-        await m.edit(content="<:done:500630347890032640> **|** Messages deleted!", delete_after=5)
+        await m.edit(content=localise("MODERATION_PRUNE_DELETED", amount=amount), delete_after=5)
 
 def setup(bot):
     bot.add_cog(moderation(bot))

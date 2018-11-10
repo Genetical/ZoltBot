@@ -1,9 +1,10 @@
 import discord
 import sys
 sys.path.append("..")
+import utils
 import re
 
-
+localise = utils.localisation.localise
 class filters:
     def __init__(self, bot):
         self.bot = bot
@@ -16,7 +17,7 @@ class filters:
                 try:
                     invite = await self.bot.get_invite(invite)
                     if invite.guild != member.guild:
-                        await member.send(f"```prolog\nYOU WERE KICKED FOR HAVING AN INVITE LINK ON YOUR NAME\nPLEASE CHANGE YOUR NAME AND REJOIN```")
+                        await member.send(localise = utils.localisation.localise("FILTERS_JOIN_INVITE_LINK"))
                         await member.kick(reason="Invite link in name")
                 except discord.NotFound:
                     pass
@@ -29,7 +30,8 @@ class filters:
                 try:
                     invite = await self.bot.get_invite(invite)
                     if invite.guild != message.guild:
-                        await message.channel.send(f"**{message.author.mention}**```prolog\nMESSAGE DELETED FOR CONTAINING AN INVITE TO A DIFFERENT SERVER```", delete_after=7)
+                        mention = message.author.mention
+                        await message.channel.send(utils.localisation.localise("FILTERS_MESSAGE_INVITE_LINK", mention=mention), delete_after=7)
                         await message.delete()
                 except discord.NotFound:
                     pass

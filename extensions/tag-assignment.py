@@ -6,6 +6,7 @@ from discord.ext import commands
 import os
 
 # Just a template, use for when adding extensions.
+localise = utils.localisation.localise
 
 class tag_assignment:
     def __init__(self, bot):
@@ -22,17 +23,18 @@ class tag_assignment:
         """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
-        temp = await ctx.send(f"<a:loading:495280632067522600> **|** Saving role *{role.name}*")
+        name = role.name
+        temp = await ctx.send(localise("", name=name))
         if role.permissions.value != 0:
-            await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to add tag *{role.name}*. Only roles with no permissions can be used as tags", delete_after=5)
+            await temp.edit(content=localise("ASSIGNMENT_TAG_PERM_0", name=name), delete_after=5)
             ctx.message.delete()
             return
 
         if utils.persistence.add_tag(role.id):
-            await temp.edit(content=f"<:check:495282532968038430> **|** Added tag *{role.name}* successfully", delete_after=5)
+            await temp.edit(content=localise("ASSIGNMENT_TAG_SUCCESS", name=name), delete_after=5)
             ctx.message.delete()
         else:
-            await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to add tag *{role.name}*. This is probably to do with the database. <@&388020265222668288>")
+            await temp.edit(content=localise("ASSIGNMENT_TAG_PERM_FAIL_GENERIC", name=name))
 
     @commands.command(pass_context=True)
     @commands.has_permissions(manage_roles=True)
@@ -43,13 +45,14 @@ class tag_assignment:
         """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
-        temp = await ctx.send(f"<a:loading:495280632067522600> **|** Removing role *{role.name}*")
+        name = role.name
+        temp = await ctx.send(localise("ASSIGNMENT_RTAG_SAVING", name=name))
 
         if utils.persistence.del_tag(role.id):
-            await temp.edit(content=f"<:check:495282532968038430> **|** Removed tag *{role.name}* successfully", delete_after=5)
+            await temp.edit(content=localise("ASSIGNMENT_RTAG_SUCCESS", name=name), delete_after=5)
             ctx.message.delete()
         else:
-            await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to remove tag *{role.name}*. This is probably to do with the database. <@&388020265222668288>")
+            await temp.edit(content=localise("ASSIGNMENT_RTAG_FAIL", name=name))
 
     @commands.command(pass_context=True)
     async def assign(self, ctx, *role):
@@ -59,12 +62,13 @@ class tag_assignment:
         """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
-        temp = await ctx.send(f"<a:loading:495280632067522600> **|** Finding role *{role.name}*")
+        name = role.name
+        temp = await ctx.send(localise("ASSIGNMENT_ASSIGN_FINDING", name=name))
         if utils.persistence.verify_tag(role.id):
             await ctx.author.add_roles(role)
-            await temp.edit(content=f"<:check:495282532968038430> **|** Assigned tag *{role.name}* successfully", delete_after=5)
+            await temp.edit(content=localise("ASSIGNMENT_ASSIGN_SUCCESS", name=name), delete_after=5)
         else:
-            await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to assign tag *{role.name}*. This may be because you are not authorised to assign this tag.", delete_after=5)
+            await temp.edit(content=localise("ASSIGNMENT_ASSIGN_FAIL", name=name), delete_after=5)
         ctx.message.delete()
 
     @commands.command(pass_context=True)
@@ -75,13 +79,13 @@ class tag_assignment:
         """
         argument = " ".join(role)
         role = await self.converter.convert(ctx=ctx, argument=argument)
-
-        temp = await ctx.send(f"<a:loading:495280632067522600> **|** Finding role *{role.name}*")
+        name = role.name
+        temp = await ctx.send(localise("ASSIGNMENT_UNASSIGN_FINDING", name=name))
         if utils.persistence.verify_tag(role.id):
             await ctx.author.remove_roles(role)
-            await temp.edit(content=f"<:check:495282532968038430> **|** Unassigned tag *{role.name}* successfully", delete_after=5)
+            await temp.edit(content=localise("ASSIGNMENT_UNASSIGN_SUCCESS", name=name), delete_after=5)
         else:
-            await temp.edit(content=f"<:xmark:495282541347995667> **|** Failed to Unassign tag *{role.name}*. This may be because you are not authorised to Unassign this tag.", delete_after=5)
+            await temp.edit(content=localise("ASSIGNMENT_UNASSIGN_FAIL", name=name), delete_after=5)
         ctx.message.delete()
 
     @commands.command(pass_context=True)
@@ -90,7 +94,7 @@ class tag_assignment:
 
         [p]**list**: Provides a list of all assigned tags.
         """
-        temp = await ctx.send(f"<a:loading:495280632067522600> **|** Fetching roles")
+        temp = await ctx.send(localise("ASSIGNMENT_TAGS_LOADING"))
 
         end = []
         tags = utils.persistence.dump_tags()
@@ -99,12 +103,12 @@ class tag_assignment:
                 if str(role.id) in tags:
                     end.append(role.name)
 
-            nl = "\n".join(end)
+            tags = "\n".join(end)
 
-            await temp.edit(content=f"<:check:495282532968038430> **|** The following roles are authorised as tags:\n```\n{nl}```")
+            await temp.edit(content=localise("ASSIGNMENT_TAGS_SUCCESS", tags=tags))
             ctx.message.delete()
         else:
-            await temp.edit(content=f"<:xmark:495282541347995667> **|** Error! This is probably to do with the database. <@&388020265222668288>")
+            await temp.edit(content=localise("ASSIGNMENT_TAGS_FAIL"))
 
 
 def setup(bot):
