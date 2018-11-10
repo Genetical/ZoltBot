@@ -25,7 +25,7 @@ async def localise_perm(ctx):
             check = True
             break
     check = is_owner(ctx)
-    return True
+    return check
 
 localise = utils.localisation.localise
 class development:
